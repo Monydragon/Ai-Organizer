@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="MainWindow.axaml" value="Ai Organizer.csproj" />
+        <entry key="Views/PlanPreviewView.axaml" value="Ai Organizer.csproj" />
       </map>
     </option>
   </component>

@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Ai_Organizer.Views.PlanPreviewView">
+    <StackPanel Margin="8" Spacing="10">
+        <TextBlock Classes="h2" Text="Plan Preview" />
+        <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <TextBlock Classes="muted" Text="{Binding Placeholder}" TextWrapping="Wrap" />
+        </Border>
+    </StackPanel>
+</UserControl>
+
+

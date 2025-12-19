@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Ai_Organizer.Views.SettingsView">
+    <ScrollViewer>
+        <StackPanel Margin="8" Spacing="14">
+            <StackPanel>
+                <TextBlock Classes="h2" Text="Settings" />
+                <TextBlock Classes="muted" Text="{Binding Status}" />
+            </StackPanel>
+
+            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Ollama" FontWeight="SemiBold" />
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Endpoint" />
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding OllamaEndpoint}" />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Model" />
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OllamaModel}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="OpenAI" FontWeight="SemiBold" />
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Endpoint" />
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding OpenAiEndpoint}" />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Model" />
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OpenAiModel}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Default Prompt" FontWeight="SemiBold" />
+                    <TextBox Text="{Binding DefaultPrompt}" AcceptsReturn="True" MinHeight="120" TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Content="Load" Command="{Binding LoadCommand}" />
+                <Button Content="Save" Command="{Binding SaveCommand}" Classes="accent" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
+
+

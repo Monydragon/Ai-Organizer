@@ -2,8 +2,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:Ai_Organizer.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Ai_Organizer.MainWindow"
-        Title="Ai_Organizer">
-    Welcome to Avalonia!
+        Title="AI Desktop Organizer"
+        MinWidth="1000"
+        MinHeight="650">
+
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Padding="16,14" Background="{DynamicResource SystemControlAcrylicWindowBrush}">
+            <StackPanel Spacing="2">
+                <TextBlock Text="AI Desktop Organizer" FontSize="20" FontWeight="SemiBold" />
+                <TextBlock Classes="muted" Text="{Binding StatusText}" />
+            </StackPanel>
+        </Border>
+
+        <TabControl Margin="12">
+            <TabItem Header="Scan">
+                <views:ScanView DataContext="{Binding Scan}" />
+            </TabItem>
+            <TabItem Header="Plan Preview">
+                <views:PlanPreviewView DataContext="{Binding PlanPreview}" />
+            </TabItem>
+            <TabItem Header="Settings">
+                <views:SettingsView DataContext="{Binding Settings}" />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
