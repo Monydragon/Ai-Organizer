@@ -5,6 +5,8 @@ public sealed class AppSettings
     public OllamaSettings Ollama { get; set; } = new();
     public OpenAiSettings OpenAi { get; set; } = new();
 
+    public string PreferredProvider { get; set; } = "Ollama";
+
     /// <summary>
     /// Free-form prompt that becomes the default system instruction for planning.
     /// </summary>

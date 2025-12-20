@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QylRfkUDYbw=",
+  "dgSpecHash": "zQi6UQ8Rynw=",
   "success": true,
   "projectFilePath": "C:\\Projects\\Github\\Avalonia\\Ai-Organizer\\Ai Organizer\\Ai Organizer.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\monyd\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.25547.20250602\\avalonia.angle.windows.natives.2.1.25547.20250602.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\avalonia.buildservices\\11.3.2\\avalonia.buildservices.11.3.2.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\avalonia.controls.colorpicker\\11.3.10\\avalonia.controls.colorpicker.11.3.10.nupkg.sha512",
+    "C:\\Users\\monyd\\.nuget\\packages\\avalonia.controls.datagrid\\11.3.10\\avalonia.controls.datagrid.11.3.10.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\avalonia.desktop\\11.3.10\\avalonia.desktop.11.3.10.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\avalonia.diagnostics\\11.3.10\\avalonia.diagnostics.11.3.10.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\avalonia.fonts.inter\\11.3.10\\avalonia.fonts.inter.11.3.10.nupkg.sha512",
@@ -46,6 +47,7 @@
     "C:\\Users\\monyd\\.nuget\\packages\\skiasharp.nativeassets.webassembly\\2.88.9\\skiasharp.nativeassets.webassembly.2.88.9.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.9\\skiasharp.nativeassets.win32.2.88.9.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
+    "C:\\Users\\monyd\\.nuget\\packages\\system.security.cryptography.protecteddata\\10.0.1\\system.security.cryptography.protecteddata.10.0.1.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\tmds.dbus.protocol\\0.21.2\\tmds.dbus.protocol.0.21.2.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.11\\microsoft.netcore.app.ref.9.0.11.nupkg.sha512",
     "C:\\Users\\monyd\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.11\\microsoft.windowsdesktop.app.ref.9.0.11.nupkg.sha512",

@@ -72,3 +72,20 @@ C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\refint\Ai
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.pdb
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.genruntimeconfig.cache
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\ref\Ai Organizer.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\CommunityToolkit.Mvvm.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Configuration.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Diagnostics.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Http.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Avalonia.Controls.DataGrid.dll

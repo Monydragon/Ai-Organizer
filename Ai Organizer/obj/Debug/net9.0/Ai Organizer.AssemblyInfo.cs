@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ai Organizer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+046ebc18478f654c66337bc998903aed16f8ef28")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca17de985fdbe4939968991041e0ffddd340a331")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ai Organizer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ai Organizer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

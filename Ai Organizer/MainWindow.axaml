@@ -3,8 +3,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Ai_Organizer.Views"
+        xmlns:vm="clr-namespace:Ai_Organizer.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Ai_Organizer.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         Title="AI Desktop Organizer"
         MinWidth="1000"
         MinHeight="650">

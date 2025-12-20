@@ -8,10 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.3.10"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.3.10"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.10"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.10"/>
+        <PackageReference Include="Avalonia" Version="11.3.10" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.3.10" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.10" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.10" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.10" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Include="Avalonia.Diagnostics" Version="11.3.10">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
@@ -21,5 +22,6 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
         <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="9.0.0" />
+        <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.1" />
     </ItemGroup>
 </Project>

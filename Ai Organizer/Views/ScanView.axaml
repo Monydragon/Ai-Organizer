@@ -1,5 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Ai_Organizer.ViewModels"
+             x:DataType="vm:ScanViewModel"
              x:Class="Ai_Organizer.Views.ScanView">
     <ScrollViewer>
         <StackPanel Spacing="14" Margin="8">
@@ -10,13 +12,39 @@
 
             <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
                 <StackPanel Spacing="10">
+                    <TextBlock Text="Roots" FontWeight="SemiBold" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="Add Folders" Command="{Binding AddFoldersCommand}" />
+                        <Button Content="Add Files" Command="{Binding AddFilesCommand}" />
+                        <Button Content="Clear" Command="{Binding ClearRootsCommand}" />
+                    </StackPanel>
+
+                    <ItemsControl ItemsSource="{Binding Roots}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <DockPanel LastChildFill="True" Margin="0,2">
+                                    <Button DockPanel.Dock="Right"
+                                            Content="Remove"
+                                            Padding="10,4"
+                                            Command="{Binding $parent[vm:ScanViewModel].RemoveRootCommand}"
+                                            CommandParameter="{Binding}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding}" TextTrimming="CharacterEllipsis" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <StackPanel Spacing="10">
                     <TextBlock Text="Scan Options" FontWeight="SemiBold" />
                     <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Include glob" />
                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding IncludeGlob}" Watermark="**/*" />
 
                         <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Exclude glob" />
-                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ExcludeGlob}" Watermark="**/{bin,obj}/**" />
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ExcludeGlob}" Watermark="**/bin/**;**/obj/**" />
 
                         <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Max depth" />
                         <NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding MaxDepth}" />
@@ -27,9 +55,54 @@
             </Border>
 
             <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-                <StackPanel Spacing="8">
-                    <TextBlock Text="Next steps" FontWeight="SemiBold" />
-                    <TextBlock Classes="muted" Text="In the next milestone this screen will let you add folders/files, run the scan, and review the candidates list." />
+                <StackPanel Spacing="10">
+                    <DockPanel LastChildFill="True">
+                        <TextBlock DockPanel.Dock="Left" Text="Candidates" FontWeight="SemiBold" />
+                        <TextBlock DockPanel.Dock="Right" Classes="muted" Text="{Binding ScanStatus}" />
+                    </DockPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="Scan" Command="{Binding ScanCommand}" IsEnabled="{Binding !IsScanning}" Classes="accent" />
+                        <Button Content="Cancel" Command="{Binding CancelScanCommand}" IsEnabled="{Binding IsScanning}" />
+                        <Button Content="Select All" Command="{Binding SelectAllCommand}" />
+                        <Button Content="Select None" Command="{Binding SelectNoneCommand}" />
+                    </StackPanel>
+
+                    <DataGrid ItemsSource="{Binding Candidates}" AutoGenerateColumns="False" IsReadOnly="False" Height="340">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Use" Width="60">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate x:DataType="vm:FileCandidateItemViewModel">
+                                        <CheckBox IsChecked="{Binding IsSelected}" HorizontalAlignment="Center" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Relative path" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate x:DataType="vm:FileCandidateItemViewModel">
+                                        <TextBlock Text="{Binding RelativePath}" TextTrimming="CharacterEllipsis" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Size" Width="110">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate x:DataType="vm:FileCandidateItemViewModel">
+                                        <TextBlock Text="{Binding SizeDisplay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Modified" Width="140">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate x:DataType="vm:FileCandidateItemViewModel">
+                                        <TextBlock Text="{Binding LastWriteDisplay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
             </Border>
         </StackPanel>

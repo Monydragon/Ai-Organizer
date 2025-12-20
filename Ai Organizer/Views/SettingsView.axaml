@@ -1,5 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Ai_Organizer.ViewModels"
+             x:DataType="vm:SettingsViewModel"
              x:Class="Ai_Organizer.Views.SettingsView">
     <ScrollViewer>
         <StackPanel Margin="8" Spacing="14">
@@ -7,6 +9,18 @@
                 <TextBlock Classes="h2" Text="Settings" />
                 <TextBlock Classes="muted" Text="{Binding Status}" />
             </StackPanel>
+
+            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Provider" FontWeight="SemiBold" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock VerticalAlignment="Center" Text="Preferred" />
+                        <ComboBox Width="160" ItemsSource="{Binding ProviderOptions}" SelectedItem="{Binding PreferredProvider}" />
+                        <Button Content="Load" Command="{Binding LoadCommand}" />
+                        <Button Content="Save" Command="{Binding SaveCommand}" Classes="accent" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
 
             <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
                 <StackPanel Spacing="10">
@@ -18,19 +32,52 @@
                         <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Model" />
                         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OllamaModel}" />
                     </Grid>
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="Test / List Models" Command="{Binding TestOllamaCommand}" />
+                        <TextBlock Classes="muted" VerticalAlignment="Center" Text="{Binding OllamaModels.Count, StringFormat=Models: {0}}" />
+                    </StackPanel>
+
+                    <ItemsControl ItemsSource="{Binding OllamaModels}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Border>
 
             <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
                 <StackPanel Spacing="10">
                     <TextBlock Text="OpenAI" FontWeight="SemiBold" />
-                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Endpoint" />
                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding OpenAiEndpoint}" />
 
                         <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Model" />
                         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OpenAiModel}" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="API key" />
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 PasswordChar="*"
+                                 Text="{Binding OpenAiApiKey}"
+                                 Watermark="Paste key here (will be stored locally)"/>
                     </Grid>
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="Test / List Models" Command="{Binding TestOpenAiCommand}" />
+                        <TextBlock Classes="muted" VerticalAlignment="Center" Text="{Binding HasOpenAiApiKey, StringFormat=Has key: {0}}" />
+                        <TextBlock Classes="muted" VerticalAlignment="Center" Text="{Binding OpenAiModels.Count, StringFormat=Models: {0}}" />
+                    </StackPanel>
+
+                    <ItemsControl ItemsSource="{Binding OpenAiModels}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Border>
 
@@ -40,11 +87,6 @@
                     <TextBox Text="{Binding DefaultPrompt}" AcceptsReturn="True" MinHeight="120" TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
-
-            <StackPanel Orientation="Horizontal" Spacing="10">
-                <Button Content="Load" Command="{Binding LoadCommand}" />
-                <Button Content="Save" Command="{Binding SaveCommand}" Classes="accent" />
-            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
