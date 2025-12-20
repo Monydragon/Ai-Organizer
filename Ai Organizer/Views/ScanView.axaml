@@ -3,72 +3,97 @@
              xmlns:vm="clr-namespace:Ai_Organizer.ViewModels"
              x:DataType="vm:ScanViewModel"
              x:Class="Ai_Organizer.Views.ScanView">
-    <ScrollViewer>
-        <StackPanel Spacing="14" Margin="8">
-            <StackPanel>
-                <TextBlock Classes="h2" Text="Scan" />
+
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Padding="16" Background="{DynamicResource SystemControlAcrylicWindowBrush}">
+            <StackPanel Spacing="6">
+                <TextBlock Classes="h2" Text="Scan &amp; Triage" />
                 <TextBlock Classes="muted" Text="{Binding SelectedRootsSummary}" />
+                <TextBlock Classes="muted" Text="{Binding ScanStatus}" />
             </StackPanel>
+        </Border>
 
-            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-                <StackPanel Spacing="10">
-                    <TextBlock Text="Roots" FontWeight="SemiBold" />
-                    <StackPanel Orientation="Horizontal" Spacing="10">
-                        <Button Content="Add Folders" Command="{Binding AddFoldersCommand}" />
-                        <Button Content="Add Files" Command="{Binding AddFilesCommand}" />
-                        <Button Content="Clear" Command="{Binding ClearRootsCommand}" />
+        <Grid ColumnDefinitions="2.2*,1.1*" RowDefinitions="Auto,*" Margin="12" ColumnSpacing="12" RowSpacing="12">
+
+            <!-- Roots / options -->
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border Classes="card" Grid.Column="0">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Roots" Classes="section" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Content="Add Folders" Command="{Binding AddFoldersCommand}" />
+                            <Button Content="Add Files" Command="{Binding AddFilesCommand}" />
+                            <Button Content="Clear" Command="{Binding ClearRootsCommand}" />
+                        </StackPanel>
+
+                        <ItemsControl ItemsSource="{Binding Roots}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <DockPanel LastChildFill="True" Margin="0,2">
+                                        <Button DockPanel.Dock="Right"
+                                                Content="Remove"
+                                                Padding="10,4"
+                                                Command="{Binding $parent[vm:ScanViewModel].RemoveRootCommand}"
+                                                CommandParameter="{Binding}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding}" TextTrimming="CharacterEllipsis" />
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
+                </Border>
 
-                    <ItemsControl ItemsSource="{Binding Roots}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="x:String">
-                                <DockPanel LastChildFill="True" Margin="0,2">
-                                    <Button DockPanel.Dock="Right"
-                                            Content="Remove"
-                                            Padding="10,4"
-                                            Command="{Binding $parent[vm:ScanViewModel].RemoveRootCommand}"
-                                            CommandParameter="{Binding}" />
-                                    <TextBlock VerticalAlignment="Center" Text="{Binding}" TextTrimming="CharacterEllipsis" />
-                                </DockPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </Border>
+                <Border Classes="card" Grid.Column="1">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Scan Options" Classes="section" />
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Include glob" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding IncludeGlob}" Watermark="**/*" />
 
-            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-                <StackPanel Spacing="10">
-                    <TextBlock Text="Scan Options" FontWeight="SemiBold" />
-                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
-                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Include glob" />
-                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding IncludeGlob}" Watermark="**/*" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Exclude glob" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ExcludeGlob}" Watermark="**/bin/**;**/obj/**" />
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Exclude glob" />
-                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ExcludeGlob}" Watermark="**/bin/**;**/obj/**" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Max depth" />
+                            <NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding MaxDepth}" />
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Max depth" />
-                        <NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding MaxDepth}" />
+                            <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                      Content="Include hidden/system files" IsChecked="{Binding IncludeHidden}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
 
-                        <CheckBox Grid.Row="3" Grid.ColumnSpan="2" Content="Include hidden/system files" IsChecked="{Binding IncludeHidden}" />
-                    </Grid>
-                </StackPanel>
-            </Border>
-
-            <Border Padding="12" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <!-- Candidates list -->
+            <Border Classes="card" Grid.Row="1" Grid.Column="0">
                 <StackPanel Spacing="10">
                     <DockPanel LastChildFill="True">
-                        <TextBlock DockPanel.Dock="Left" Text="Candidates" FontWeight="SemiBold" />
-                        <TextBlock DockPanel.Dock="Right" Classes="muted" Text="{Binding ScanStatus}" />
+                        <TextBlock DockPanel.Dock="Left" Text="Candidates" Classes="section" />
+                        <TextBlock DockPanel.Dock="Right" Classes="muted"
+                                   Text="{Binding SelectedCount, StringFormat='Selected: {0}'}" />
                     </DockPanel>
 
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <TextBox Grid.Column="0" Text="{Binding CandidateSearchText}" Watermark="Filter by name, extension, path…" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                            <Button Content="Scan" Command="{Binding ScanCommand}" IsEnabled="{Binding !IsScanning}" />
+                            <Button Content="Cancel" Command="{Binding CancelScanCommand}" IsEnabled="{Binding IsScanning}" />
+                        </StackPanel>
+                    </Grid>
+
                     <StackPanel Orientation="Horizontal" Spacing="10">
-                        <Button Content="Scan" Command="{Binding ScanCommand}" IsEnabled="{Binding !IsScanning}" Classes="accent" />
-                        <Button Content="Cancel" Command="{Binding CancelScanCommand}" IsEnabled="{Binding IsScanning}" />
                         <Button Content="Select All" Command="{Binding SelectAllCommand}" />
                         <Button Content="Select None" Command="{Binding SelectNoneCommand}" />
+                        <Button Content="Invert" Command="{Binding SelectInvertCommand}" />
+                        <Button Content="Remove Selected" Command="{Binding RemoveSelectedCommand}" />
+                        <TextBlock Classes="muted" VerticalAlignment="Center"
+                                   Text="{Binding SelectedSizeDisplay, StringFormat='Size: {0}'}" />
                     </StackPanel>
 
-                    <DataGrid ItemsSource="{Binding Candidates}" AutoGenerateColumns="False" IsReadOnly="False" Height="340">
+                    <DataGrid ItemsSource="{Binding FilteredCandidates}"
+                              SelectedItem="{Binding SelectedCandidate}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="False"
+                              Height="430">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Use" Width="60">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -78,35 +103,45 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Relative path" Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate x:DataType="vm:FileCandidateItemViewModel">
-                                        <TextBlock Text="{Binding RelativePath}" TextTrimming="CharacterEllipsis" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn Header="Size" Width="110">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate x:DataType="vm:FileCandidateItemViewModel">
-                                        <TextBlock Text="{Binding SizeDisplay}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn Header="Modified" Width="140">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate x:DataType="vm:FileCandidateItemViewModel">
-                                        <TextBlock Text="{Binding LastWriteDisplay}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Relative path" Binding="{Binding RelativePath}" Width="*" />
+                            <DataGridTextColumn Header="Size" Binding="{Binding SizeDisplay}" Width="110" />
+                            <DataGridTextColumn Header="Modified" Binding="{Binding LastWriteDisplay}" Width="150" />
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <TextBlock Classes="muted" TextWrapping="Wrap"
+                               Text="Tip: click a row to preview details on the right. Use the filter box to narrow down quickly." />
                 </StackPanel>
             </Border>
-        </StackPanel>
-    </ScrollViewer>
-</UserControl>
 
+            <!-- Details / preview -->
+            <Border Classes="card alt" Grid.Row="1" Grid.Column="1">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Selection" Classes="section" />
+
+                    <Border Classes="card" Padding="12">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="{Binding SelectedCandidate.Name}" FontSize="16" FontWeight="SemiBold" />
+                            <TextBlock Classes="muted" Text="{Binding SelectedCandidate.RelativePath}" TextWrapping="Wrap" />
+
+                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="6">
+                                <TextBlock Grid.Row="0" Grid.Column="0" Classes="muted" Text="Size" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedCandidate.SizeDisplay}" />
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Classes="muted" Text="Modified" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedCandidate.LastWriteDisplay}" />
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Classes="muted" Text="Path" />
+                                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedCandidate.FullPath}" IsReadOnly="True" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Classes="muted" TextWrapping="Wrap"
+                               Text="Next step: we can add thumbnail/text preview and drag &amp; drop roots for a full file triage workflow." />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </DockPanel>
+</UserControl>
 

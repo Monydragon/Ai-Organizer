@@ -4,6 +4,7 @@ using Ai_Organizer.Services.Ui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -27,12 +28,13 @@ public sealed partial class ScanViewModel : ObservableObject
 
     public ObservableCollection<string> Roots { get; } = new();
     public ObservableCollection<FileCandidateItemViewModel> Candidates { get; } = new();
+    public ObservableCollection<FileCandidateItemViewModel> FilteredCandidates { get; } = new();
 
     [ObservableProperty]
     private string _selectedRootsSummary = "No roots selected yet.";
 
     [ObservableProperty]
-    private bool _includeHidden = false;
+    private bool _includeHidden;
 
     [ObservableProperty]
     private int _maxDepth = 12;
@@ -98,6 +100,79 @@ public sealed partial class ScanViewModel : ObservableObject
         UpdateRootsSummary();
     }
 
+    [ObservableProperty]
+    private FileCandidateItemViewModel? _selectedCandidate;
+
+    [ObservableProperty]
+    private string _candidateSearchText = "";
+
+    partial void OnCandidateSearchTextChanged(string value)
+    {
+        _ = value;
+        ApplyCandidateFilter();
+    }
+
+    public int SelectedCount => Candidates.Count(c => c.IsSelected);
+    public long SelectedBytes => Candidates.Where(c => c.IsSelected).Sum(c => c.SizeBytes);
+    public string SelectedSizeDisplay => Infrastructure.Formatters.Bytes(SelectedBytes);
+
+    partial void OnSelectedCandidateChanged(FileCandidateItemViewModel? value)
+    {
+        _ = value;
+        // no-op for now; exists to enable future preview loading hooks
+    }
+
+    private void WireCandidate(FileCandidateItemViewModel item)
+    {
+        item.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(FileCandidateItemViewModel.IsSelected))
+            {
+                OnPropertyChanged(nameof(SelectedCount));
+                OnPropertyChanged(nameof(SelectedBytes));
+                OnPropertyChanged(nameof(SelectedSizeDisplay));
+            }
+        };
+    }
+
+    private void ApplyCandidateFilter()
+    {
+        var q = CandidateSearchText.Trim();
+
+        IEnumerable<FileCandidateItemViewModel> query = Candidates;
+        if (!string.IsNullOrWhiteSpace(q))
+        {
+            query = query.Where(c =>
+                c.RelativePath.Contains(q, StringComparison.OrdinalIgnoreCase) ||
+                c.Name.Contains(q, StringComparison.OrdinalIgnoreCase) ||
+                c.Extension.Contains(q, StringComparison.OrdinalIgnoreCase));
+        }
+
+        FilteredCandidates.Clear();
+        foreach (var c in query)
+            FilteredCandidates.Add(c);
+    }
+
+    [RelayCommand]
+    private void SelectInvert()
+    {
+        foreach (var c in Candidates)
+            c.IsSelected = !c.IsSelected;
+    }
+
+    [RelayCommand]
+    private void RemoveSelected()
+    {
+        var toRemove = Candidates.Where(c => c.IsSelected).ToList();
+        foreach (var c in toRemove)
+            Candidates.Remove(c);
+
+        ApplyCandidateFilter();
+        OnPropertyChanged(nameof(SelectedCount));
+        OnPropertyChanged(nameof(SelectedBytes));
+        OnPropertyChanged(nameof(SelectedSizeDisplay));
+    }
+
     [RelayCommand(CanExecute = nameof(CanScan))]
     private async Task ScanAsync()
     {
@@ -111,6 +186,7 @@ public sealed partial class ScanViewModel : ObservableObject
         IsScanning = true;
         ScanStatus = "Scanning...";
         Candidates.Clear();
+        FilteredCandidates.Clear();
 
         var options = new ScanOptions
         {
@@ -133,7 +209,16 @@ public sealed partial class ScanViewModel : ObservableObject
         {
             var results = await _scanner.ScanAsync(options, progress, ct);
             foreach (var r in results)
-                Candidates.Add(new FileCandidateItemViewModel(r));
+            {
+                var vm = new FileCandidateItemViewModel(r);
+                WireCandidate(vm);
+                Candidates.Add(vm);
+            }
+
+            ApplyCandidateFilter();
+            OnPropertyChanged(nameof(SelectedCount));
+            OnPropertyChanged(nameof(SelectedBytes));
+            OnPropertyChanged(nameof(SelectedSizeDisplay));
 
             ScanStatus = $"Done. Matched {Candidates.Count:N0} files.";
         }
@@ -159,6 +244,10 @@ public sealed partial class ScanViewModel : ObservableObject
     {
         foreach (var c in Candidates)
             c.IsSelected = true;
+
+        OnPropertyChanged(nameof(SelectedCount));
+        OnPropertyChanged(nameof(SelectedBytes));
+        OnPropertyChanged(nameof(SelectedSizeDisplay));
     }
 
     [RelayCommand]
@@ -166,6 +255,10 @@ public sealed partial class ScanViewModel : ObservableObject
     {
         foreach (var c in Candidates)
             c.IsSelected = false;
+
+        OnPropertyChanged(nameof(SelectedCount));
+        OnPropertyChanged(nameof(SelectedBytes));
+        OnPropertyChanged(nameof(SelectedSizeDisplay));
     }
 
     private bool CanScan() => Roots.Count > 0 && !IsScanning;
@@ -181,5 +274,4 @@ public sealed partial class ScanViewModel : ObservableObject
         SelectedRootsSummary = $"{Roots.Count} root(s) selected.";
     }
 }
-
 

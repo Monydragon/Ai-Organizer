@@ -16,6 +16,9 @@ public sealed partial class MainWindowViewModel : ObservableObject
         Settings = settings;
         ModelBrowser = modelBrowser;
         InteractiveConfig = interactiveConfig;
+
+        // Fire-and-forget initial load so the Models tab isn't empty.
+        _ = ModelBrowser.LoadModelsAsync();
     }
 
     public ScanViewModel Scan { get; }
@@ -27,5 +30,3 @@ public sealed partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private string _statusText = "Ready.";
 }
-
-

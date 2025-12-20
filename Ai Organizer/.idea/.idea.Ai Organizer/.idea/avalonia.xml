@@ -3,7 +3,9 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="App.axaml" value="Ai Organizer.csproj" />
         <entry key="MainWindow.axaml" value="Ai Organizer.csproj" />
+        <entry key="Styles/AppStyles.axaml" value="Ai Organizer.csproj" />
         <entry key="Views/InteractiveConfigView.axaml" value="Ai Organizer.csproj" />
         <entry key="Views/ModelBrowserView.axaml" value="Ai Organizer.csproj" />
         <entry key="Views/PlanPreviewView.axaml" value="Ai Organizer.csproj" />

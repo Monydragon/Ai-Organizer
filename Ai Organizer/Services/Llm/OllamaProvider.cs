@@ -1,7 +1,6 @@
 using Ai_Organizer.Services.Settings;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -33,7 +32,17 @@ public sealed class OllamaProvider : ILLMProvider, IModelRepository
         var baseUrl = s.Ollama.Endpoint.TrimEnd('/');
         var client = _httpClientFactory.CreateClient();
 
-        using var resp = await client.GetAsync($"{baseUrl}/api/tags", cancellationToken);
+        HttpResponseMessage resp;
+        try
+        {
+            resp = await client.GetAsync($"{baseUrl}/api/tags", cancellationToken);
+        }
+        catch
+        {
+            // Endpoint unreachable (not running / blocked). Treat as no models.
+            return Array.Empty<string>();
+        }
+
         resp.EnsureSuccessStatusCode();
 
         await using var stream = await resp.Content.ReadAsStreamAsync(cancellationToken);

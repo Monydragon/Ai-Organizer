@@ -3,111 +3,159 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Ai_Organizer.ViewModels"
+             xmlns:models="clr-namespace:Ai_Organizer.Models"
+             xmlns:infra="clr-namespace:Ai_Organizer.Infrastructure"
              mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
              x:Class="Ai_Organizer.Views.ModelBrowserView"
              x:DataType="vm:ModelBrowserViewModel">
-    
+
     <DockPanel>
         <Border DockPanel.Dock="Top" Padding="16" Background="{DynamicResource SystemControlAcrylicWindowBrush}">
-            <StackPanel Spacing="8">
-                <TextBlock Text="Model Browser" FontSize="18" FontWeight="SemiBold" />
-                <TextBlock Text="{Binding StatusMessage}" Classes="muted" />
-                <ProgressBar IsIndeterminate="{Binding IsLoading}" Height="4" />
-            </StackPanel>
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="4">
+                <StackPanel Grid.Row="0" Grid.Column="0" Spacing="2">
+                    <TextBlock Text="Model Browser" Classes="h2" />
+                    <TextBlock Text="Browse, filter, and manage models across providers." Classes="muted" />
+                </StackPanel>
+
+                <ProgressBar Grid.Row="0" Grid.Column="1" IsIndeterminate="{Binding IsLoading}" Width="220" Height="4" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding StatusMessage}" Classes="muted" />
+            </Grid>
         </Border>
 
-        <Grid ColumnDefinitions="*,*" Margin="12">
-            <!-- Available Models -->
-            <StackPanel Grid.Column="0" Spacing="12">
-                <TextBlock Text="Available Models" FontSize="14" FontWeight="SemiBold" />
-                <Button Command="{Binding LoadModelsCommand}" Content="Refresh" />
-                
-                <ListBox ItemsSource="{Binding AvailableModels}" 
-                         SelectedItem="{Binding SelectedModel}"
-                         Height="500">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border Padding="8" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}">
-                                <StackPanel Spacing="4">
-                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
-                                    <TextBlock Text="{Binding ProviderName}" Classes="muted" FontSize="11" />
-                                    <StackPanel Orientation="Horizontal" Spacing="16">
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="Vision: {0}">
-                                                    <Binding Path="SupportsVision" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                        <TextBlock Text="{Binding IsDownloaded, StringFormat='Downloaded: {0}'}" />
-                                        <TextBlock Text="{Binding PerformanceScore, StringFormat='Score: {0:P}'}" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+        <Grid ColumnDefinitions="2.2*,1.3*" Margin="12" ColumnSpacing="12">
 
-            <!-- Model Details & Actions -->
-            <StackPanel Grid.Column="1" Spacing="12" Margin="12,0,0,0">
-                <TextBlock Text="Model Details" FontSize="14" FontWeight="SemiBold" />
-                
-                <Border Padding="12" Background="{DynamicResource SystemControlBackgroundAltHighBrush}" CornerRadius="4">
-                    <StackPanel Spacing="8" IsEnabled="{Binding SelectedModel, Converter={x:Static ObjectConverters.IsNotNull}}">
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="Name: {0}">
-                                    <Binding Path="SelectedModel.Name" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                        <TextBlock Text="{Binding SelectedModel.ProviderName, StringFormat='Provider: {0}'}" />
-                        <TextBlock Text="{Binding SelectedModel.IsDownloaded, StringFormat='Downloaded: {0}'}" />
-                        <TextBlock Text="{Binding SelectedModel.DateDownloaded, StringFormat='Date: {0:g}'}" />
-                        <TextBlock Text="{Binding SelectedModel.SizeBytes, StringFormat='Size: {0:N0} bytes'}" />
+            <!-- Catalog -->
+            <Border Classes="card" Grid.Column="0">
+                <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="10">
 
-                        <StackPanel Spacing="8" Margin="0,16,0,0">
-                            <Button Command="{Binding DownloadModelCommand}" 
-                                    CommandParameter="{Binding SelectedModel}"
-                                    Content="Download" 
-                                    IsEnabled="{Binding !SelectedModel.IsDownloaded}" />
-                            <Button Command="{Binding UpdateModelCommand}" 
-                                    CommandParameter="{Binding SelectedModel}"
-                                    Content="Update" 
-                                    IsEnabled="{Binding SelectedModel.IsDownloaded}" />
-                            <Button Command="{Binding DeleteModelCommand}" 
-                                    CommandParameter="{Binding SelectedModel}"
-                                    Content="Delete" 
-                                    IsEnabled="{Binding SelectedModel.IsDownloaded}" />
-                            <Button Command="{Binding CancelOperationCommand}" Content="Cancel" IsEnabled="{Binding IsLoading}" />
+                    <DockPanel Grid.Row="0" LastChildFill="True">
+                        <TextBlock DockPanel.Dock="Left" Text="Catalog" Classes="section" />
+                        <Button DockPanel.Dock="Right" Command="{Binding LoadModelsCommand}" Content="Refresh" />
+                    </DockPanel>
+
+                    <!-- Search + filters -->
+                    <Grid Grid.Row="1" ColumnDefinitions="*,180,Auto,Auto,200" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="8">
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SearchText}" Watermark="Search name, provider, description…" />
+
+                        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ProviderOptions}" SelectedItem="{Binding SelectedProvider}" />
+
+                        <CheckBox Grid.Row="0" Grid.Column="2" Content="Downloaded" IsChecked="{Binding ShowDownloadedOnly}" />
+                        <CheckBox Grid.Row="0" Grid.Column="3" Content="Vision" IsChecked="{Binding ShowVisionOnly}" />
+
+                        <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                            <ComboBox ItemsSource="{x:Static infra:ModelSortByValuesProvider.Values}" SelectedItem="{Binding SortBy}" MinWidth="150" />
+                            <ToggleSwitch IsChecked="{Binding SortDescending}" Content="Desc" />
                         </StackPanel>
 
-                        <ProgressBar Value="{Binding DownloadProgress}" Margin="0,16,0,0" Height="4" />
-                    </StackPanel>
-                </Border>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Classes="muted"
+                                   Text="{Binding FilteredModels.Count, StringFormat='Showing {0} model(s)'}" />
+                    </Grid>
 
-                <!-- Performance Data -->
-                <TextBlock Text="Performance Rankings" FontSize="14" FontWeight="SemiBold" Margin="0,16,0,0" />
-                <ListBox ItemsSource="{Binding ModelPerformance}" Height="250">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border Padding="8" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}">
-                                <StackPanel Spacing="4">
-                                    <TextBlock Text="{Binding ModelName}" FontWeight="SemiBold" />
-                                    <StackPanel Orientation="Horizontal" Spacing="16">
-                                        <TextBlock FontSize="11" Text="{Binding ProviderName}" Classes="muted" />
-                                        <TextBlock FontSize="11" Text="{Binding AverageQualityScore, StringFormat='Quality: {0:P}'}" />
-                                        <TextBlock FontSize="11" Text="{Binding AverageResponseTimeMs, StringFormat='Latency: {0}ms'}" />
-                                        <TextBlock FontSize="11" Text="{Binding TotalCostUsd, StringFormat='Cost: ${0:F2}'}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding TotalRequests, StringFormat='Total Requests: {0}'}" FontSize="10" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+                    <!-- Data area (fills remaining space) -->
+                    <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="8">
+                        <!-- Column headers -->
+                        <Grid Grid.Row="0" ColumnDefinitions="*,160,110,90,100,70" ColumnSpacing="10" Margin="6,0,6,0">
+                            <TextBlock Text="Name" Classes="muted" />
+                            <TextBlock Grid.Column="1" Text="Provider" Classes="muted" />
+                            <TextBlock Grid.Column="2" Text="Size" Classes="muted" />
+                            <TextBlock Grid.Column="3" Text="Score" Classes="muted" />
+                            <TextBlock Grid.Column="4" Text="Downloaded" Classes="muted" />
+                            <TextBlock Grid.Column="5" Text="Vision" Classes="muted" />
+                        </Grid>
+
+                        <ListBox Grid.Row="1"
+                                 ItemsSource="{Binding FilteredModels}"
+                                 SelectedItem="{Binding SelectedModelItem}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ModelCatalogItemViewModel">
+                                    <Border Padding="10,8" CornerRadius="8">
+                                        <Grid ColumnDefinitions="*,160,110,90,100,70" ColumnSpacing="10">
+                                            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Grid.Column="1" Text="{Binding ProviderName}" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Grid.Column="2" Text="{Binding SizeDisplay}" />
+                                            <TextBlock Grid.Column="3" Text="{Binding ScoreDisplay}" />
+                                            <TextBlock Grid.Column="4" Text="{Binding IsDownloaded}" />
+                                            <TextBlock Grid.Column="5" Text="{Binding SupportsVision}" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <!-- Empty state overlay -->
+                        <Border Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False"
+                                IsVisible="{Binding FilteredModels.Count, Converter={x:Static infra:ObjectConverters.IsZero}}"
+                                Background="Transparent">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="6">
+                                <TextBlock Text="No models to show" FontSize="16" FontWeight="SemiBold" />
+                                <TextBlock Classes="muted" Text="Try Refresh, change Provider, or clear filters." />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <TextBlock Grid.Row="3" Classes="muted" TextWrapping="Wrap"
+                               Text="Tip: use filters to quickly find downloaded models or vision-capable models." />
+                </Grid>
+            </Border>
+
+            <!-- Details -->
+            <Border Classes="card alt" Grid.Column="1">
+                <Grid RowDefinitions="Auto,*,Auto,*" RowSpacing="10">
+                    <TextBlock Grid.Row="0" Text="Details" Classes="section" />
+
+                    <Border Grid.Row="1" Classes="card" Padding="12">
+                        <StackPanel Spacing="8" IsEnabled="{Binding SelectedModelItem, Converter={x:Static infra:ObjectConverters.IsNotNull}}">
+                            <TextBlock Text="{Binding SelectedModelItem.Name}" FontSize="16" FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding SelectedModelItem.ProviderName, StringFormat='Provider: {0}'}" Classes="muted" />
+
+                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="6">
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Downloaded" Classes="muted" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedModelItem.IsDownloaded}" />
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Size" Classes="muted" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedModelItem.SizeDisplay}" />
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Date" Classes="muted" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedModelItem.DateDownloadedDisplay}" />
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Vision" Classes="muted" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SelectedModelItem.SupportsVision}" />
+                            </Grid>
+
+                            <TextBlock Text="{Binding SelectedModelItem.DescriptionDisplay}" TextWrapping="Wrap" />
+
+                            <StackPanel Spacing="8" Margin="0,10,0,0">
+                                <Button Command="{Binding DownloadModelCommand}" CommandParameter="{Binding SelectedModelInfo}" Content="Download" />
+                                <Button Command="{Binding UpdateModelCommand}" CommandParameter="{Binding SelectedModelInfo}" Content="Update" />
+                                <Button Command="{Binding DeleteModelCommand}" CommandParameter="{Binding SelectedModelInfo}" Content="Delete" />
+                                <Button Command="{Binding CancelOperationCommand}" Content="Cancel" IsEnabled="{Binding IsLoading}" />
+                            </StackPanel>
+
+                            <ProgressBar Value="{Binding DownloadProgress}" Margin="0,12,0,0" Height="4" />
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Grid.Row="2" Text="Performance Rankings" Classes="section" />
+
+                    <ListBox Grid.Row="3" ItemsSource="{Binding ModelPerformance}" BorderThickness="1"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" CornerRadius="10">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:ModelPerformanceSummary">
+                                <Border Padding="10,8">
+                                    <Grid ColumnDefinitions="*,140,90,110,90" ColumnSpacing="10">
+                                        <TextBlock Text="{Binding ModelName}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Grid.Column="1" Text="{Binding ProviderName}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Grid.Column="2" Text="{Binding AverageQualityScore, StringFormat={}{0:P0}}" />
+                                        <TextBlock Grid.Column="3" Text="{Binding AverageResponseTimeMs, StringFormat={}{0:0} ms}" />
+                                        <TextBlock Grid.Column="4" Text="{Binding TotalCostUsd, StringFormat={}${0:F2}}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
         </Grid>
     </DockPanel>
 </UserControl>
