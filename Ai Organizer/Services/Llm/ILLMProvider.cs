@@ -17,4 +17,20 @@ public interface ILLMProvider
     Task<string> ChatJsonAsync(ChatJsonRequest request, CancellationToken cancellationToken);
 }
 
+public interface IModelRepository
+{
+    string Name { get; }
+    RepositoryType Type { get; }
+    bool Enabled { get; }
 
+    Task<IReadOnlyList<string>> ListModelsAsync(CancellationToken cancellationToken);
+}
+
+public enum RepositoryType
+{
+    Ollama,
+    OpenAi,
+    HuggingFace,
+    GoogleGemini,
+    Anthropic
+}

@@ -7,16 +7,22 @@ public sealed partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel(
         ScanViewModel scan,
         PlanPreviewViewModel planPreview,
-        SettingsViewModel settings)
+        SettingsViewModel settings,
+        ModelBrowserViewModel modelBrowser,
+        InteractiveConfigViewModel interactiveConfig)
     {
         Scan = scan;
         PlanPreview = planPreview;
         Settings = settings;
+        ModelBrowser = modelBrowser;
+        InteractiveConfig = interactiveConfig;
     }
 
     public ScanViewModel Scan { get; }
     public PlanPreviewViewModel PlanPreview { get; }
     public SettingsViewModel Settings { get; }
+    public ModelBrowserViewModel ModelBrowser { get; }
+    public InteractiveConfigViewModel InteractiveConfig { get; }
 
     [ObservableProperty]
     private string _statusText = "Ready.";

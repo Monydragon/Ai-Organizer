@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ai_Organizer.Services.Llm;
 
-public sealed class OpenAiProvider : ILLMProvider
+public sealed class OpenAiProvider : ILLMProvider, IModelRepository
 {
     private readonly AppSettingsService _settings;
     private readonly ISecretStore _secrets;
@@ -25,6 +25,8 @@ public sealed class OpenAiProvider : ILLMProvider
     }
 
     public string Name => "OpenAI";
+    public RepositoryType Type => RepositoryType.OpenAi;
+    public bool Enabled => true;
     public bool SupportsVision => true; // model-dependent
 
     public async Task<IReadOnlyList<string>> ListModelsAsync(CancellationToken cancellationToken)
@@ -98,5 +100,3 @@ public sealed class OpenAiProvider : ILLMProvider
         return content ?? "";
     }
 }
-
-

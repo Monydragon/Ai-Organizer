@@ -4,6 +4,8 @@
     <option name="projectPerEditor">
       <map>
         <entry key="MainWindow.axaml" value="Ai Organizer.csproj" />
+        <entry key="Views/InteractiveConfigView.axaml" value="Ai Organizer.csproj" />
+        <entry key="Views/ModelBrowserView.axaml" value="Ai Organizer.csproj" />
         <entry key="Views/PlanPreviewView.axaml" value="Ai Organizer.csproj" />
         <entry key="Views/ScanView.axaml" value="Ai Organizer.csproj" />
         <entry key="Views/SettingsView.axaml" value="Ai Organizer.csproj" />

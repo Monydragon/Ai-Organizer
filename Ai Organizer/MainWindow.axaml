@@ -20,8 +20,14 @@
         </Border>
 
         <TabControl Margin="12">
+            <TabItem Header="Setup">
+                <views:InteractiveConfigView DataContext="{Binding InteractiveConfig}" />
+            </TabItem>
             <TabItem Header="Scan">
                 <views:ScanView DataContext="{Binding Scan}" />
+            </TabItem>
+            <TabItem Header="Models">
+                <views:ModelBrowserView DataContext="{Binding ModelBrowser}" />
             </TabItem>
             <TabItem Header="Plan Preview">
                 <views:PlanPreviewView DataContext="{Binding PlanPreview}" />

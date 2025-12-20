@@ -1,6 +1,7 @@
 using Ai_Organizer.Services.Settings;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ai_Organizer.Services.Llm;
 
-public sealed class OllamaProvider : ILLMProvider
+public sealed class OllamaProvider : ILLMProvider, IModelRepository
 {
     private readonly AppSettingsService _settings;
     private readonly IHttpClientFactory _httpClientFactory;
@@ -22,6 +23,8 @@ public sealed class OllamaProvider : ILLMProvider
     }
 
     public string Name => "Ollama";
+    public RepositoryType Type => RepositoryType.Ollama;
+    public bool Enabled => true;
     public bool SupportsVision => true; // model-dependent, but safe for UI capability
 
     public async Task<IReadOnlyList<string>> ListModelsAsync(CancellationToken cancellationToken)
@@ -83,5 +86,3 @@ public sealed class OllamaProvider : ILLMProvider
         return content.GetString() ?? "";
     }
 }
-
-

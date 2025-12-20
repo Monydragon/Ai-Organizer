@@ -1,8 +1,4 @@
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.exe
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.deps.json
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.runtimeconfig.json
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.pdb
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Avalonia.Base.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Avalonia.Controls.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Avalonia.DesignerSupport.dll
@@ -31,47 +27,8 @@ C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\HarfBuzzS
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\MicroCom.Runtime.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\SkiaSharp.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Tmds.DBus.Protocol.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-arm64\native\av_libglesv2.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x64\native\av_libglesv2.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x86\native\av_libglesv2.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\osx\native\libAvaloniaNative.dylib
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-loongarch64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-arm\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-arm64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-loongarch64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-riscv64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-riscv64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-x86\native\libHarfBuzzSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\osx\native\libHarfBuzzSharp.dylib
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm\native\libSkiaSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm64\native\libSkiaSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-x64\native\libSkiaSharp.so
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\osx\native\libSkiaSharp.dylib
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-arm64\native\libSkiaSharp.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x64\native\libSkiaSharp.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x86\native\libSkiaSharp.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.csproj.AssemblyReference.cache
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Avalonia\Resources.Inputs.cache
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Avalonia\resources
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.AssemblyInfoInputs.cache
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.AssemblyInfo.cs
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.csproj.CoreCompileInputs.cache
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.sourcelink.json
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organ.51806A76.Up2Date
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\refint\Ai Organizer.dll
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.pdb
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.genruntimeconfig.cache
-C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\ref\Ai Organizer.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\CommunityToolkit.Mvvm.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Configuration.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -89,3 +46,46 @@ C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
 C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Avalonia.Controls.DataGrid.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.exe
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.deps.json
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.runtimeconfig.json
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-arm64\native\av_libglesv2.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x64\native\av_libglesv2.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x86\native\av_libglesv2.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\osx\native\libAvaloniaNative.dylib
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-loongarch64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-arm\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-arm64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-loongarch64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-riscv64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-riscv64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-x86\native\libHarfBuzzSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm\native\libSkiaSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-arm64\native\libSkiaSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.csproj.AssemblyReference.cache
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Avalonia\Resources.Inputs.cache
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Avalonia\resources
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.AssemblyInfoInputs.cache
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.AssemblyInfo.cs
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.csproj.CoreCompileInputs.cache
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.sourcelink.json
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organ.51806A76.Up2Date
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\refint\Ai Organizer.dll
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.pdb
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\Ai Organizer.genruntimeconfig.cache
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\bin\Debug\net9.0\Ai Organizer.pdb
+C:\Projects\Github\Avalonia\Ai-Organizer\Ai Organizer\obj\Debug\net9.0\ref\Ai Organizer.dll

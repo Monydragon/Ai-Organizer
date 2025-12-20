@@ -49,6 +49,15 @@ public sealed partial class ScanViewModel : ObservableObject
     [ObservableProperty]
     private string _scanStatus = "Idle.";
 
+    [ObservableProperty]
+    private int _dirsScanned;
+
+    [ObservableProperty]
+    private int _filesScanned;
+
+    [ObservableProperty]
+    private int _filesMatched;
+
     [RelayCommand]
     private async Task AddFoldersAsync()
     {
@@ -114,6 +123,9 @@ public sealed partial class ScanViewModel : ObservableObject
 
         var progress = new Progress<ScanProgress>(p =>
         {
+            DirsScanned = p.DirectoriesVisited;
+            FilesScanned = p.FilesVisited;
+            FilesMatched = p.FilesMatched;
             ScanStatus = $"Root: {p.CurrentRoot} | Dirs: {p.DirectoriesVisited:N0} | Files: {p.FilesVisited:N0} | Matched: {p.FilesMatched:N0}";
         });
 

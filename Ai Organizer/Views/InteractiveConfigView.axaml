@@ -1,0 +1,92 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Ai_Organizer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Ai_Organizer.Views.InteractiveConfigView"
+             x:DataType="vm:InteractiveConfigViewModel">
+
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Padding="16" Background="{DynamicResource SystemControlAcrylicWindowBrush}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="Organization Setup Wizard" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Text="{Binding StatusMessage}" Classes="muted" />
+            </StackPanel>
+        </Border>
+
+        <Border DockPanel.Dock="Bottom" Padding="16">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,*" ColumnSpacing="8">
+                <Button Grid.Column="0" Command="{Binding ResetCommand}" Content="Reset" />
+                <Button Grid.Column="1" Content="Help" IsEnabled="False" />
+                <TextBlock Grid.Column="3" Text="Answer questions to configure your organization preferences" 
+                           VerticalAlignment="Center" Classes="muted" />
+            </Grid>
+        </Border>
+
+        <ScrollViewer Margin="16">
+            <StackPanel Spacing="16">
+                <!-- Conversation History -->
+                <Border Padding="12" Background="{DynamicResource SystemControlBackgroundAltHighBrush}" CornerRadius="4">
+                    <ListBox ItemsSource="{Binding QuestionsAndAnswers}" Height="250">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" TextWrapping="Wrap" Margin="8" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+
+                <!-- Current Question -->
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{Binding CurrentQuestion}" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    
+                    <!-- Dynamic Input Controls -->
+                    <StackPanel Spacing="8" IsVisible="{Binding !IsComplete}">
+                        <TextBox Text="{Binding UserInput}" 
+                                 Watermark="Enter your response..." 
+                                 Height="60" 
+                                 AcceptsReturn="True" />
+                        <Button Command="{Binding SubmitAnswerCommand}" Content="Submit Answer" />
+                    </StackPanel>
+
+                    <!-- Advanced Options -->
+                    <Expander Header="Advanced Options" Margin="0,16,0,0" Padding="12">
+                        <StackPanel Spacing="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Automation Level (Handiness)" />
+                                <Slider Value="{Binding HandinessLevel}" Minimum="0" Maximum="1" TickFrequency="0.1" />
+                                <TextBlock Text="{Binding HandinessLevel, StringFormat='Current: {0:P}'}" Classes="muted" />
+                            </StackPanel>
+
+                            <CheckBox IsChecked="{Binding UpdateMetadata}" Content="Update Metadata During Processing" />
+                            <CheckBox IsChecked="{Binding PreserveExistingMetadata}" Content="Preserve Existing Metadata" />
+
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Exclude File Types (comma-separated)" />
+                                <TextBox Text="{Binding ExcludeFileTypes}" Watermark="e.g., exe,dll,sys" />
+                            </StackPanel>
+
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Max Folder Depth" />
+                                <NumericUpDown Value="{Binding MaxFolderDepth}" Minimum="1" Maximum="10" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Expander>
+
+                    <!-- Completion Message -->
+                    <Border Padding="12" 
+                            Background="{DynamicResource SystemAccentColorLight3}" 
+                            CornerRadius="4"
+                            IsVisible="{Binding IsComplete}">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="✓ Configuration Complete!" FontWeight="SemiBold" />
+                            <TextBlock Text="Your organization settings are ready. Proceed to Scan tab to select files." TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>
+

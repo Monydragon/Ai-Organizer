@@ -1,0 +1,114 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Ai_Organizer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
+             x:Class="Ai_Organizer.Views.ModelBrowserView"
+             x:DataType="vm:ModelBrowserViewModel">
+    
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Padding="16" Background="{DynamicResource SystemControlAcrylicWindowBrush}">
+            <StackPanel Spacing="8">
+                <TextBlock Text="Model Browser" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Text="{Binding StatusMessage}" Classes="muted" />
+                <ProgressBar IsIndeterminate="{Binding IsLoading}" Height="4" />
+            </StackPanel>
+        </Border>
+
+        <Grid ColumnDefinitions="*,*" Margin="12">
+            <!-- Available Models -->
+            <StackPanel Grid.Column="0" Spacing="12">
+                <TextBlock Text="Available Models" FontSize="14" FontWeight="SemiBold" />
+                <Button Command="{Binding LoadModelsCommand}" Content="Refresh" />
+                
+                <ListBox ItemsSource="{Binding AvailableModels}" 
+                         SelectedItem="{Binding SelectedModel}"
+                         Height="500">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="8" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                                    <TextBlock Text="{Binding ProviderName}" Classes="muted" FontSize="11" />
+                                    <StackPanel Orientation="Horizontal" Spacing="16">
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Vision: {0}">
+                                                    <Binding Path="SupportsVision" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding IsDownloaded, StringFormat='Downloaded: {0}'}" />
+                                        <TextBlock Text="{Binding PerformanceScore, StringFormat='Score: {0:P}'}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <!-- Model Details & Actions -->
+            <StackPanel Grid.Column="1" Spacing="12" Margin="12,0,0,0">
+                <TextBlock Text="Model Details" FontSize="14" FontWeight="SemiBold" />
+                
+                <Border Padding="12" Background="{DynamicResource SystemControlBackgroundAltHighBrush}" CornerRadius="4">
+                    <StackPanel Spacing="8" IsEnabled="{Binding SelectedModel, Converter={x:Static ObjectConverters.IsNotNull}}">
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="Name: {0}">
+                                    <Binding Path="SelectedModel.Name" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Text="{Binding SelectedModel.ProviderName, StringFormat='Provider: {0}'}" />
+                        <TextBlock Text="{Binding SelectedModel.IsDownloaded, StringFormat='Downloaded: {0}'}" />
+                        <TextBlock Text="{Binding SelectedModel.DateDownloaded, StringFormat='Date: {0:g}'}" />
+                        <TextBlock Text="{Binding SelectedModel.SizeBytes, StringFormat='Size: {0:N0} bytes'}" />
+
+                        <StackPanel Spacing="8" Margin="0,16,0,0">
+                            <Button Command="{Binding DownloadModelCommand}" 
+                                    CommandParameter="{Binding SelectedModel}"
+                                    Content="Download" 
+                                    IsEnabled="{Binding !SelectedModel.IsDownloaded}" />
+                            <Button Command="{Binding UpdateModelCommand}" 
+                                    CommandParameter="{Binding SelectedModel}"
+                                    Content="Update" 
+                                    IsEnabled="{Binding SelectedModel.IsDownloaded}" />
+                            <Button Command="{Binding DeleteModelCommand}" 
+                                    CommandParameter="{Binding SelectedModel}"
+                                    Content="Delete" 
+                                    IsEnabled="{Binding SelectedModel.IsDownloaded}" />
+                            <Button Command="{Binding CancelOperationCommand}" Content="Cancel" IsEnabled="{Binding IsLoading}" />
+                        </StackPanel>
+
+                        <ProgressBar Value="{Binding DownloadProgress}" Margin="0,16,0,0" Height="4" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Performance Data -->
+                <TextBlock Text="Performance Rankings" FontSize="14" FontWeight="SemiBold" Margin="0,16,0,0" />
+                <ListBox ItemsSource="{Binding ModelPerformance}" Height="250">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="8" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="{Binding ModelName}" FontWeight="SemiBold" />
+                                    <StackPanel Orientation="Horizontal" Spacing="16">
+                                        <TextBlock FontSize="11" Text="{Binding ProviderName}" Classes="muted" />
+                                        <TextBlock FontSize="11" Text="{Binding AverageQualityScore, StringFormat='Quality: {0:P}'}" />
+                                        <TextBlock FontSize="11" Text="{Binding AverageResponseTimeMs, StringFormat='Latency: {0}ms'}" />
+                                        <TextBlock FontSize="11" Text="{Binding TotalCostUsd, StringFormat='Cost: ${0:F2}'}" />
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding TotalRequests, StringFormat='Total Requests: {0}'}" FontSize="10" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>
+
